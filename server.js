@@ -3,13 +3,14 @@ const express = require("express")
 const app = express()
 const port = 3000
 
-// verifico se funziona importando il db
-// const connection = require("./data/movies_db")
+// Importo router
+const router =require('./router/routes')
 
-//  BODY PARSER JSON E PER LA CARTELLA PUBLIC
+
+//  BODY PARSER JSON E PER LA CARTELLA PUBLIC e il router
 app.use(express.json())
 app.use(express.static("public"))
-
+app.use("/api/movie",router)
 
 
 // Impostiamo la rotta home
