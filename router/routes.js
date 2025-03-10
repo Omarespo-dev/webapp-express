@@ -10,8 +10,9 @@ const router = express.Router()
 // INDEX VISUALIZZA TUTTI GLI ELEMENTI CON .GET 
 router.get("/",controllersRouter.index)
 
+// SHOW VISUALIZZA UN ELEMENTO CON .GET /:ID
 
-
+router.get("/:id",controllersRouter.show)
 
 //esporto router
 module.exports = router
