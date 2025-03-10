@@ -9,6 +9,11 @@ const router =require('./router/routes')
 const setImagePath = require("./middlewares/ImagePath")
 app.use(setImagePath)
 
+// Importo middlewares error
+const errorsHandler = require("./middlewares/errorsHandler")
+
+const notFound = require("./middlewares/notFound")
+
 //  BODY PARSER JSON E PER LA CARTELLA PUBLIC e il router
 app.use(express.json())
 app.use(express.static("public"))
@@ -20,7 +25,9 @@ app.get("/api",(req,res) =>{
     res.send("SERVER HOME")
 })
 
-
+// Uso i middlewares per gli errori in page
+app.use(errorsHandler)
+app.use(notFound)
 
 // STAI IN ASCOLTA DELLA PORTA
 app.listen(port, () =>{
