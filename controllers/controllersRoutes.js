@@ -1,6 +1,7 @@
 // importo la connessiione con il db
 const connection = require("../data/movies_db")
 
+
 // ANDIAMO A DEFINIRE LE FUNZIONI DELLE DIVERSE ROTTE
 function index(req, res) {
 
@@ -11,8 +12,17 @@ function index(req, res) {
     connection.query(moviesql, (err, results) => {
         // se la connesione del database va male dai errore 
         if (err) return res.status(500).json({ error: "Database query failed" })
+
+        // Versione mappata per le img
+        const movies = results.map(movie => {
+            return {
+                ...movie,
+                image: req.imagePath + movie.image
+            }
+        })   
+
         // altrimenti stampa i dati 
-        res.json(results)
+        res.json(movies)
     })
 }
 

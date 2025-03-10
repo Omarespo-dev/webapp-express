@@ -5,7 +5,9 @@ const port = 3000
 
 // Importo router
 const router =require('./router/routes')
-
+// Importo middlewares per le img
+const setImagePath = require("./middlewares/ImagePath")
+app.use(setImagePath)
 
 //  BODY PARSER JSON E PER LA CARTELLA PUBLIC e il router
 app.use(express.json())
