@@ -3,6 +3,9 @@ const express = require("express")
 const app = express()
 const port = 3000
 
+// verifico se funziona importando il db
+// const connection = require("./data/movies_db")
+
 //  BODY PARSER JSON E PER LA CARTELLA PUBLIC
 app.use(express.json())
 app.use(express.static("public"))
