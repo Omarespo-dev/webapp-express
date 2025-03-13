@@ -11,8 +11,10 @@ const router = express.Router()
 router.get("/",controllersRouter.index)
 
 // SHOW VISUALIZZA UN ELEMENTO CON .GET /:ID
-
 router.get("/:id",controllersRouter.show)
+
+// STORE In questo caso crea una nuova recensione con .POST
+router.post("/:id/reviews",controllersRouter.storeReviews)
 
 //esporto router
 module.exports = router

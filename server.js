@@ -1,7 +1,10 @@
 // importo express e le realative funzioni
 const express = require("express")
 const app = express()
-const port = process.env.Port
+const port = process.env.PORT
+
+// importo il cors
+const cors = require("cors")
 
 // Importo router
 const router =require('./router/routes')
@@ -9,7 +12,10 @@ const router =require('./router/routes')
 const setImagePath = require("./middlewares/ImagePath")
 app.use(setImagePath)
 
-// Importo middlewares error
+// uso il CORS
+app.use(cors({origin: process.env.FE_APP}))
+
+// Importo middlewares error 
 const errorsHandler = require("./middlewares/errorsHandler")
 
 const notFound = require("./middlewares/notFound")
