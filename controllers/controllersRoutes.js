@@ -104,11 +104,36 @@ function storeReviews(req,res){
 
 }
 
+// Nuova rotta per creare un nuovo film con la gestione anche del form
+function createNewFilm(req, res, next) {
+    
+    // Estraiamo i dati dal body della richiesta
+    const { title, director, abstract } = req.body;
 
+    // Assegniamo a imageName il nome del file caricato, ottenuto da req.file.filename
+    const imageName = `${req.file.filename}`;
+
+    // Creiamo la query SQL per inserire un nuovo film nel database
+    const SqlFilm = `
+    INSERT INTO MOVIES (title, director, abstract, image)
+    VALUES (?, ?, ?, ?)`;
+
+    // Eseguiamo la query utilizzando la connessione al database
+    connection.query(SqlFilm, [title, director, abstract, imageName], (err, result) => {
+        if (err) {
+            console.log(err); // Log dell'errore per debugging
+            return next(new Error('Errore interno del server')); // Passiamo l'errore al middleware di gestione degli errori
+        }
+        
+        // Rispondiamo con un messaggio di successo
+        res.status(201).json({ status: 'success', message: "Film creato con successo!" });
+    });
+}
 
 
 module.exports = {
     index,
     show,
-    storeReviews
+    storeReviews,
+    createNewFilm
 }
